@@ -4,7 +4,10 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      Weather App
+      <div className="container">
+        <h1>Weather App</h1>
+        <button type="button" className="btn btn-primary">Test button</button>
+      </div>
     </div>
   );
 }
