@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 
-export default function Header() {
+export default function Header(props) {
+    const [cityInput, setCityInput] = useState("");
+
+    function onSubmit(event) {
+        event.preventDefault();
+        props.citySearchCB(cityInput);
+    }
+
+    function onCityChange(event) {
+        event.preventDefault();
+        setCityInput(event.target.value);
+    }
+
     return (
         <header className="mt-2">
             <div className="row justify-content-md-center">
                 <div className="col-3 p-0">
-                    <form id="citySearchForm">
+                    <form id="citySearchForm" onSubmit={onSubmit}>
                     <span className="input-group">
                         <input
                             type="search"
@@ -15,6 +27,7 @@ export default function Header() {
                             autoComplete="off"
                             aria-describedby="searchIcon"
                             className="form-control"
+                            onChange={onCityChange}
                         />
                         <button className="input-group-text" id="searchIcon">
                         <i className="fa-solid fa-magnifying-glass"></i>

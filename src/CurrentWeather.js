@@ -8,7 +8,7 @@ export default function CurrentWeather(props) {
             <p className="mb-0" id="cityName">{props.weatherData.city}</p>
             <p id="weather-description">{props.weatherData.description}</p>
             {/* <p className="mb-2" id="current-date-time">date</p> */}
-            <FormattedDate dateObj={props.weatherData.date} />
+            <FormattedDate />
             <hr className="mt-0" />
         </div>
     );

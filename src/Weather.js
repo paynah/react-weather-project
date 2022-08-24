@@ -11,6 +11,12 @@ export default function Weather(props) {
     const apiKey = "bcecae2f970171c301c3ec24ea004803";  
     const baseApiUrl = "https://api.openweathermap.org/data/2.5/weather";
 
+    function getWeather(city) {
+        let citySearchParam = city ? city : props.defaultCity;
+        let apiUrl = `${baseApiUrl}?q=${citySearchParam}&appid=${apiKey}&units=imperial`;
+        axios.get(apiUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
+    }
+
     function handleGetWeatherResponse(response) {
         console.log(response.data);
         const newWeatherData = {};
@@ -39,7 +45,7 @@ export default function Weather(props) {
     if (weatherData.ready) {
         return (
             <div>
-                <Header />
+                <Header citySearchCB={getWeather} />
                 <CurrentWeather weatherData={weatherData} />
                 <WeatherDetails weatherData={weatherData}/>
                 
@@ -47,11 +53,9 @@ export default function Weather(props) {
             </div>
         );
     } else {
-        let city = props.defaultCity;
-        let apiUrl = `${baseApiUrl}?q=${city}&appid=${apiKey}&units=imperial`;
-        //axios.get(apiUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
+        getWeather();
         return (
-            <div class="loader">
+            <div className="loader">
                 <BounceLoader />
                 <div>Loading...</div>
             </div>);
