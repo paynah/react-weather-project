@@ -15,6 +15,7 @@ export default function Weather(props) {
         console.log(response.data);
         const newWeatherData = {};
         newWeatherData.city = response.data.name;
+        newWeatherData.date = new Date(response.data.dt * 1000);
         newWeatherData.temperature = Math.round(response.data.main.temp);
         newWeatherData.feelsLikeTemp = Math.round(response.data.main.feels_like);
         newWeatherData.humidity = response.data.main.humidity;
