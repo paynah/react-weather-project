@@ -1,0 +1,13 @@
+#cityName {
+    margin-top: 50px;
+    font-size: 25px;
+}
+
+#weather-description {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+  
+#weather-description::first-letter {
+    text-transform: capitalize;
+}
