@@ -4,6 +4,7 @@ import "./Weather.css";
 import Header from "./Header.js";
 import CurrentWeather from "./CurrentWeather";
 import WeatherDetails from "./WeatherDetails";
+import { BounceLoader } from "react-spinners";
 
 export default function Weather(props) {
     const [weatherData, setWeatherData] = useState({ready: false});
@@ -47,8 +48,12 @@ export default function Weather(props) {
     } else {
         let city = props.defaultCity;
         let apiUrl = `${baseApiUrl}?q=${city}&appid=${apiKey}&units=imperial`;
-        axios.get(apiUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
-        return "Loading...";
+        //axios.get(apiUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
+        return (
+            <div class="loader">
+                <BounceLoader />
+                <div>Loading...</div>
+            </div>);
     }
     
 }
