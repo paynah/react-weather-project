@@ -20,7 +20,27 @@ import fiftyD from "./images/50d.png";
 import fiftyN from "./images/50n.png";
 
 export default function WeatherDetails(props) {
-    let weatherIcon = getWeatherIcon(props.weatherData.icon);
+    const weatherIconMapping = {
+        "01d": zero1D,
+        "01n": zero1N,
+        "02d": zero2D,
+        "02n": zero2N,
+        "03d": zero3D,
+        "03n": zero3N,
+        "04d": zero4D,
+        "04n": zero4N,
+        "09d": zero9D,
+        "09n": zero9N,
+        "10d": tenD,
+        "10n": tenN,
+        "11d": elevenD,
+        "11n": elevenN,
+        "13d": thirteenD,
+        "13n": thirteenN,
+        "50d": fiftyD,
+        "50n": fiftyN
+    };
+    let weatherIcon = weatherIconMapping[props.weatherData.icon];
 
     return (
         <div className="row weatherDetails">
@@ -35,66 +55,4 @@ export default function WeatherDetails(props) {
             </div>
         </div>
     );
-}
-
-function getWeatherIcon(iconName) {
-    let weatherIcon = zero1D;
-
-    switch (iconName) {
-        case "01n":
-            weatherIcon = zero1N;
-            break;
-        case "02d":
-            weatherIcon = zero2D;
-            break;
-        case "02n":
-            weatherIcon = zero2N;
-            break;
-        case "03d":
-            weatherIcon = zero3D;
-            break;
-        case "03n":
-            weatherIcon = zero3N;
-            break;
-        case "04d":
-            weatherIcon = zero4D;
-            break;
-        case "04n":
-            weatherIcon = zero4N;
-            break;
-        case "09d":
-            weatherIcon = zero9D;
-            break;
-        case "09n":
-            weatherIcon = zero9N;
-            break;
-        case "10d":
-            weatherIcon = tenD;
-            break;
-        case "10n":
-            weatherIcon = tenN;
-            break;
-        case "11d":
-            weatherIcon = elevenD;
-            break;
-        case "11n":
-            weatherIcon = elevenN;
-            break;
-        case "13d":
-            weatherIcon = thirteenD;
-            break;
-        case "13n":
-            weatherIcon = thirteenN;
-            break;
-        case "50d":
-            weatherIcon = fiftyD;
-            break;
-        case "50n":
-            weatherIcon = fiftyN;
-            break;
-        default:
-            weatherIcon = zero1D;
-    }
-
-    return weatherIcon;
 }
