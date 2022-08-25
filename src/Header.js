@@ -36,7 +36,7 @@ export default function Header(props) {
                     </span>
                     </form>
                 </div>
-                <div className="col-md-auto">
+                {/* <div className="col-md-auto">
                     <span className="input-group">
                     <span
                         className="input-group-text bg-secondary border border-secondary pe-0"
@@ -52,7 +52,7 @@ export default function Header(props) {
                         aria-describedby="locationIcon"
                     />
                     </span>
-                </div>
+                </div> */}
                 <WeatherUnits tempUnitChangeCB={props.unitChangeCB} tempUnit={props.tempUnit} />
             </div>
         </header>
