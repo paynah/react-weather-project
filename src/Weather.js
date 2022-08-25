@@ -9,6 +9,7 @@ import { BounceLoader } from "react-spinners";
 
 export default function Weather(props) {
     const [weatherData, setWeatherData] = useState({ready: false});
+    const [tempUnit, setTempUnit] = useState("fahrenheit");
     const apiKey = "bcecae2f970171c301c3ec24ea004803";  
     const baseApiUrl = "https://api.openweathermap.org/data/2.5/weather";
 
@@ -46,9 +47,9 @@ export default function Weather(props) {
     if (weatherData.ready) {
         return (
             <div>
-                <Header citySearchCB={getWeather} />
+                <Header citySearchCB={getWeather} unitChangeCB={setTempUnit} tempUnit={tempUnit} />
                 <CurrentWeather weatherData={weatherData} />
-                <CurrentWeatherTemps weatherData={weatherData}/>
+                <CurrentWeatherTemps weatherData={weatherData} tempUnit={tempUnit}/>
                 <hr className="mt-3 mb-4" />
                 <WeatherDetails weatherData={weatherData} />
             </div>

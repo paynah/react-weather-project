@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Header.css";
-import Weather from "./Weather";
 import WeatherUnits from "./WeatherUnits";
 
 export default function Header(props) {
@@ -54,7 +53,7 @@ export default function Header(props) {
                     />
                     </span>
                 </div>
-                <WeatherUnits />
+                <WeatherUnits tempUnitChangeCB={props.unitChangeCB} tempUnit={props.tempUnit} />
             </div>
         </header>
     );

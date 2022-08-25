@@ -1,28 +1,50 @@
-import React, { useState } from "react";
+import React from "react";
 import "./WeatherUnits.css";
 
-export default function WeatherUnits() {
-    const [unit, setUnit] = useState("fahrenheit");
-    
+export default function WeatherUnits(props) {
     function onCelsiusUnitClick(event) {
         event.preventDefault();
+
+        if (props.tempUnit !== "celsius") {
+            props.tempUnitChangeCB("celsius");
+        }
     }
 
     function onFahrenheitUnitClick(event) {
         event.preventDefault();
-    }
 
-    return (
-        <div className="tempUnits col-1 m-0">
-            <button type="button" 
-                className="tempUnitChoice btn btn-link" 
-                id="celciusOption"
-                onClick={onCelsiusUnitClick}>°C</button>
-            &nbsp;&nbsp;/&nbsp;
-            <button type="button" 
-                className="selectedTempUnit tempUnitChoice btn btn-link" 
-                id="celciusOption"
-                onClick={onFahrenheitUnitClick}>°F</button>
-        </div>
-    );
+        if (props.tempUnit !== "fahrenheit") {
+            props.tempUnitChangeCB("fahrenheit");
+        }
+    }
+    
+    if (props.tempUnit === "fahrenheit") {
+        return (
+            <div className="tempUnits col-1 m-0">
+                <button type="button" 
+                    className="tempUnitChoice btn btn-link" 
+                    id="celsiusOption"
+                    onClick={onCelsiusUnitClick}>°C</button>
+                &nbsp;&nbsp;/&nbsp;
+                <button type="button" 
+                    className="selectedTempUnit tempUnitChoice btn btn-link" 
+                    id="fahrenheitOption"
+                    onClick={onFahrenheitUnitClick}>°F</button>
+            </div>
+        );
+    } else {
+        return (
+            <div className="tempUnits col-1 m-0">
+                <button type="button" 
+                    className="selectedTempUnit tempUnitChoice btn btn-link" 
+                    id="celsiusOption"
+                    onClick={onCelsiusUnitClick}>°C</button>
+                &nbsp;&nbsp;/&nbsp;
+                <button type="button" 
+                    className="tempUnitChoice btn btn-link" 
+                    id="fahrenheitOption"
+                    onClick={onFahrenheitUnitClick}>°F</button>
+            </div>
+        );
+    }
 }

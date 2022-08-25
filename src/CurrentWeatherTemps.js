@@ -42,6 +42,15 @@ export default function CurrentWeatherTemps(props) {
     };
     let weatherIcon = weatherIconMapping[props.weatherData.icon];
 
+    let temp = props.weatherData.temperature;
+    let tempMax = props.weatherData.tempMax;
+    let tempMin = props.weatherData.tempMin;
+    
+    if (props.tempUnit === "celsius") {
+        temp = Math.round((temp - 32) * (5/9));
+        tempMax = Math.round((tempMax - 32) * (5/9));
+        tempMin = Math.round((tempMin - 32) * (5/9));
+    } 
     return (
         <div className="row currentWeatherTemps">
             <div className="col-md-auto">
@@ -49,8 +58,8 @@ export default function CurrentWeatherTemps(props) {
             </div>
             <div className="col temps">
             <div className="row">
-                <div className="col-12" id="currentTemp">{props.weatherData.temperature}°</div>
-                <div className="tempDisplay col flex-fill" id="currentMinMaxTemp">{props.weatherData.tempMax}° / {props.weatherData.tempMin}°</div>
+                <div className="col-12" id="currentTemp">{temp}°</div>
+                <div className="tempDisplay col flex-fill" id="currentMinMaxTemp">{tempMax}° / {tempMin}°</div>
             </div>
             </div>
         </div>
