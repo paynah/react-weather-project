@@ -1,0 +1,20 @@
+.selectedTempUnit {
+    font-weight: bold;
+}
+
+.tempUnitChoice {
+    text-decoration: none;
+    color: black;
+    padding-left: 0px;
+    padding-right: 0px; 
+}
+
+.tempUnitChoice:focus {
+    box-shadow: none !important;
+    color: black;
+}
+
+.tempUnits {
+    margin-left: 0px;
+    padding-left: 0px;
+}

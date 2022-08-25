@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Weather.css";
 import Header from "./Header.js";
 import CurrentWeather from "./CurrentWeather";
+import CurrentWeatherTemps from "./CurrentWeatherTemps";
 import WeatherDetails from "./WeatherDetails";
 import { BounceLoader } from "react-spinners";
 
@@ -47,9 +48,9 @@ export default function Weather(props) {
             <div>
                 <Header citySearchCB={getWeather} />
                 <CurrentWeather weatherData={weatherData} />
-                <WeatherDetails weatherData={weatherData}/>
-                
+                <CurrentWeatherTemps weatherData={weatherData}/>
                 <hr className="mt-3 mb-4" />
+                <WeatherDetails weatherData={weatherData} />
             </div>
         );
     } else {

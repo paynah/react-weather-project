@@ -1,17 +1,13 @@
-#big-weather-icon {
-    width: 110px;
-    height: 110px;
-    margin-top: 15px;
-    margin-right: 10px;
+.weatherDetail {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+.weather-detail-icon {
+    width: 30px;
+    height: 30px;
 }
 
-#currentTemp {
-    font-size: 100px;
-    line-height: 100px;
-    margin-top: 10px;
-}
-
-.temps {
-    margin-left: 7px;
-    padding: 0px;
+.weatherDetailValue {
+    margin-left: 10px;
 }
