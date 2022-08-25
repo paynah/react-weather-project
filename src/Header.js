@@ -15,6 +15,19 @@ export default function Header(props) {
         setCityInput(event.target.value);
     }
 
+    function onCurrentLocationBtnClick(event) {
+        event.preventDefault();
+
+        navigator.geolocation.getCurrentPosition(requestCurrentLocationCB);
+    }
+
+    function requestCurrentLocationCB(position) {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+      
+        props.getWeatherByCurLocCB(latitude, longitude);
+    }
+
     return (
         <header className="mt-2">
             <div className="row justify-content-md-center">
@@ -36,7 +49,7 @@ export default function Header(props) {
                     </span>
                     </form>
                 </div>
-                {/* <div className="col-md-auto">
+                <div className="col-md-auto">
                     <span className="input-group">
                     <span
                         className="input-group-text bg-secondary border border-secondary pe-0"
@@ -50,9 +63,10 @@ export default function Header(props) {
                         value="Use current location"
                         className="btn btn-secondary"
                         aria-describedby="locationIcon"
+                        onClick={onCurrentLocationBtnClick}
                     />
                     </span>
-                </div> */}
+                </div>
                 <WeatherUnits tempUnitChangeCB={props.unitChangeCB} tempUnit={props.tempUnit} />
             </div>
         </header>

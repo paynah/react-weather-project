@@ -19,6 +19,11 @@ export default function Weather(props) {
         axios.get(apiUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
     }
 
+    function getWeatherByCoords(latitude, longitude) {
+        let reqUrl = `${baseApiUrl}?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
+        axios.get(reqUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
+      }
+
     function handleGetWeatherResponse(response) {
         console.log(response.data);
         const newWeatherData = {};
@@ -47,7 +52,7 @@ export default function Weather(props) {
     if (weatherData.ready) {
         return (
             <div>
-                <Header citySearchCB={getWeather} unitChangeCB={setTempUnit} tempUnit={tempUnit} />
+                <Header citySearchCB={getWeather} unitChangeCB={setTempUnit} getWeatherByCurLocCB={getWeatherByCoords} tempUnit={tempUnit} />
                 <CurrentWeather weatherData={weatherData} />
                 <CurrentWeatherTemps weatherData={weatherData} tempUnit={tempUnit}/>
                 <hr className="mt-3 mb-4" />
