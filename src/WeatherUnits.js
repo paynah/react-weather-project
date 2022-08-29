@@ -17,34 +17,36 @@ export default function WeatherUnits(props) {
             props.tempUnitChangeCB("fahrenheit");
         }
     }
+
+    return "";
     
-    if (props.tempUnit === "fahrenheit") {
-        return (
-            <div className="tempUnits col-1 m-0">
-                <button type="button" 
-                    className="tempUnitChoice btn btn-link" 
-                    id="celsiusOption"
-                    onClick={onCelsiusUnitClick}>°C</button>
-                &nbsp;&nbsp;/&nbsp;
-                <button type="button" 
-                    className="selectedTempUnit tempUnitChoice btn btn-link" 
-                    id="fahrenheitOption"
-                    onClick={onFahrenheitUnitClick}>°F</button>
-            </div>
-        );
-    } else {
-        return (
-            <div className="tempUnits col-1 m-0">
-                <button type="button" 
-                    className="selectedTempUnit tempUnitChoice btn btn-link" 
-                    id="celsiusOption"
-                    onClick={onCelsiusUnitClick}>°C</button>
-                &nbsp;&nbsp;/&nbsp;
-                <button type="button" 
-                    className="tempUnitChoice btn btn-link" 
-                    id="fahrenheitOption"
-                    onClick={onFahrenheitUnitClick}>°F</button>
-            </div>
-        );
-    }
+    // if (props.tempUnit === "fahrenheit") {
+    //     return (
+    //         <div className="tempUnits col-1 m-0">
+    //             <button type="button" 
+    //                 className="tempUnitChoice btn btn-link" 
+    //                 id="celsiusOption"
+    //                 onClick={onCelsiusUnitClick}>°C</button>
+    //             &nbsp;&nbsp;/&nbsp;
+    //             <button type="button" 
+    //                 className="selectedTempUnit tempUnitChoice btn btn-link" 
+    //                 id="fahrenheitOption"
+    //                 onClick={onFahrenheitUnitClick}>°F</button>
+    //         </div>
+    //     );
+    // } else {
+    //     return (
+    //         <div className="tempUnits col-1 m-0">
+    //             <button type="button" 
+    //                 className="selectedTempUnit tempUnitChoice btn btn-link" 
+    //                 id="celsiusOption"
+    //                 onClick={onCelsiusUnitClick}>°C</button>
+    //             &nbsp;&nbsp;/&nbsp;
+    //             <button type="button" 
+    //                 className="tempUnitChoice btn btn-link" 
+    //                 id="fahrenheitOption"
+    //                 onClick={onFahrenheitUnitClick}>°F</button>
+    //         </div>
+    //     );
+    // }
 }

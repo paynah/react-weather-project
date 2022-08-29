@@ -67,7 +67,7 @@ export default function Header(props) {
                     />
                     </span>
                 </div>
-                {/* <WeatherUnits tempUnitChangeCB={props.unitChangeCB} tempUnit={props.tempUnit} /> */}
+                <WeatherUnits tempUnitChangeCB={props.unitChangeCB} tempUnit={props.tempUnit} />
             </div>
         </header>
     );
