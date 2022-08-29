@@ -1,22 +1,21 @@
-import React from "react";
 import "./WeatherUnits.css";
 
 export default function WeatherUnits(props) {
-    function onCelsiusUnitClick(event) {
-        event.preventDefault();
+    // function onCelsiusUnitClick(event) {
+    //     event.preventDefault();
 
-        if (props.tempUnit !== "celsius") {
-            props.tempUnitChangeCB("celsius");
-        }
-    }
+    //     if (props.tempUnit !== "celsius") {
+    //         props.tempUnitChangeCB("celsius");
+    //     }
+    // }
 
-    function onFahrenheitUnitClick(event) {
-        event.preventDefault();
+    // function onFahrenheitUnitClick(event) {
+    //     event.preventDefault();
 
-        if (props.tempUnit !== "fahrenheit") {
-            props.tempUnitChangeCB("fahrenheit");
-        }
-    }
+    //     if (props.tempUnit !== "fahrenheit") {
+    //         props.tempUnitChangeCB("fahrenheit");
+    //     }
+    // }
 
     return "";
     
