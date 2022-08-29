@@ -3,7 +3,6 @@ import "./WeatherForecast.css";
 import WeatherForecastDay from "./WeatherForecastDay";
 
 export default function WeatherForecast(props) {
-    console.log(props);
     return (
         <div className="row" id="forecast">
             <WeatherForecastDay dayData={props.weatherData.forecast[0]}/>

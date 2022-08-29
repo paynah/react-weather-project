@@ -49,7 +49,7 @@ export default function WeatherIcon(props) {
     } else {
         return (
             <div>
-                <img src={weatherIcon} alt="" class="dailyWeatherIcon" />
+                <img src={weatherIcon} alt="" className="dailyWeatherIcon" />
             </div>
         );
     }
