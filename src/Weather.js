@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Weather.css";
 import Header from "./Header.js";
@@ -6,26 +6,38 @@ import CurrentWeather from "./CurrentWeather";
 import CurrentWeatherTemps from "./CurrentWeatherTemps";
 import WeatherDetails from "./WeatherDetails";
 import { BounceLoader } from "react-spinners";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
     const [weatherData, setWeatherData] = useState({ready: false});
     const [tempUnit, setTempUnit] = useState("fahrenheit");
-    const apiKey = "bcecae2f970171c301c3ec24ea004803";  
+    const [reqInProgress, setReqInProgress] = useState(false);
+    // const apiKey = "bcecae2f970171c301c3ec24ea004803";  
+    const apiKey = "b40b135798f82a05aed08769f9275f50";
     const baseApiUrl = "https://api.openweathermap.org/data/2.5/weather";
+    const oneCallBaseApiUrl = "https://api.openweathermap.org/data/2.5/onecall?";
 
     function getWeather(city) {
-        let citySearchParam = city ? city : props.defaultCity;
-        let apiUrl = `${baseApiUrl}?q=${citySearchParam}&appid=${apiKey}&units=imperial`;
-        axios.get(apiUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
+        if (!reqInProgress) {
+            setReqInProgress(true);
+
+            let citySearchParam = city ? city : props.defaultCity;
+            let apiUrl = `${baseApiUrl}?q=${citySearchParam}&appid=${apiKey}&units=imperial`;
+            axios.get(apiUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
+        }
     }
 
     function getWeatherByCoords(latitude, longitude) {
-        let reqUrl = `${baseApiUrl}?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
-        axios.get(reqUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
-      }
+        if (!reqInProgress) {
+            setReqInProgress(true);
+
+            let reqUrl = `${baseApiUrl}?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
+            axios.get(reqUrl).then(handleGetWeatherResponse).catch(handleErrorResponse);
+        }
+    }
 
     function handleGetWeatherResponse(response) {
-        console.log(response.data);
+        //console.log(response.data);
         const newWeatherData = {};
         newWeatherData.city = response.data.name;
         newWeatherData.date = new Date(response.data.dt * 1000);
@@ -39,14 +51,52 @@ export default function Weather(props) {
         newWeatherData.sunrise = formatUnixTime(response.data.sys.sunrise);
         newWeatherData.sunset = formatUnixTime(response.data.sys.sunset);
         newWeatherData.windSpeed = Math.round(response.data.wind.speed);
-        newWeatherData.ready = true;
+        newWeatherData.ready = false;
+        newWeatherData.coordinates = {latitude: response.data.coord.lat, longitude: response.data.coord.lon};
 
         setWeatherData(newWeatherData);
     }
 
+    useEffect(() => {
+        if (weatherData.city && weatherData.forecast == null) {
+            getForecast();
+        }
+    });
+
+    function getForecast() {
+        let reqUrl = `${oneCallBaseApiUrl}lat=${weatherData.coordinates.latitude}&lon=${weatherData.coordinates.longitude}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`;
+        axios.get(reqUrl).then(onGetForecastResponse).catch(handleErrorResponse);
+    }
+
+    function onGetForecastResponse(response) {
+        const dailyData = response.data.daily;
+      
+        let forecast = [];
+        for (let x = 0; x < 5; x++) {
+          const forecastDay = {};
+          forecastDay.date = new Date(dailyData[x].dt * 1000);
+          forecastDay.tempMin = Math.round(dailyData[x].temp.min);
+          forecastDay.tempMax = Math.round(dailyData[x].temp.max);
+          forecastDay.icon = dailyData[x].weather[0].icon;
+
+          forecast.push(forecastDay);
+        }
+
+        const newWeatherData = structuredClone(weatherData);
+        newWeatherData.forecast = forecast;
+        newWeatherData.ready = true;
+
+        setWeatherData(newWeatherData);
+        setReqInProgress(false);
+      }
+
     function handleErrorResponse(error) {
         const errorMsg = error.response ? error.response.data.message : "An error has occurred. Please try again.";
-        alert(errorMsg);
+        if (error.message) {
+            alert(error.message);
+        } else {
+            alert(errorMsg);
+        }
     } 
 
     if (weatherData.ready) {
@@ -57,6 +107,8 @@ export default function Weather(props) {
                 <CurrentWeatherTemps weatherData={weatherData} tempUnit={tempUnit}/>
                 <hr className="mt-3 mb-4" />
                 <WeatherDetails weatherData={weatherData} />
+                <hr className="mt-0" />
+                <WeatherForecast weatherData={weatherData} />
             </div>
         );
     } else {
